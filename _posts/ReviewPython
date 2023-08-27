@@ -1,0 +1,247 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+
+#print out list
+myList=["bananas","apples","desks"]
+for x in myList:
+    print(x)
+
+#Basic operators
+reminder=10%3
+print(reminder)
+#sqaured and cubic; interesting on cubed....
+y=3
+sq=y**2
+cub=y**3
+print(sq,cub)
+#strings and multiply??? Crazy repeat..!!
+StolenKey="BeepBeep"*10
+print(StolenKey)
+
+#List and operators: surprising too, only add on to the previous list
+odd=[1,3,5,7]
+even=[2,4,6,8]
+all_numbers=odd+even
+newL=even*3
+
+#Attend list 2 into list 1 
+List1=["a","b","c"]
+List2=[1,2,3]
+for x in List1:
+    List1.append(List2)
+print(List1)
+#or copy list
+List1a=List1.copy()
+
+#This unchanged and ordered Tupole. No remove or add
+This_unchanged_Tuple=("banana","apple","smoothie")
+
+#Workaround to change Tuple items:Tuple to list and list to Tuples
+Tuple1=("banana","cantelope","orange")
+Fruit=list(Tuple1)
+Fruit[1]="strawberry"
+Tuple2=tuple(Fruit)
+
+#Unpack a tuple...not sure why useful
+fruits = ("apple", "banana", "cherry")
+
+(green, yellow, red) = fruits
+#Several ways to loop thorugh a tuple:for, while, position, for x in X
+#Count how many time an item appeared in Tuplecount()
+#search for the position of a specific value-index()
+
+#Set {} items are uncahngeable but you can remove items and add new ones
+# Sets are unordered and duplicates will be ignored.
+#Not as smart as grocery list ha
+ThisSet={"apples","cherry","banana","cherry"}
+print(ThisSet)
+#True and 1 are considered as the same value
+Set1={"apple","watermelon","banana","apple",True, 1}
+#Sets can contain a variety of data types
+Set2={"apple","banana",1,2,5.0,"True"}
+print(type(Set2))
+for x in Set2:
+    print(x)
+    
+#Add items to current set, add another set of values
+#to current set
+Set3={"apple","pear","banana"}
+Set3.add("pineapple")
+print(Set3)
+Set4={"car","plane"}
+Set3.update(Set4)
+print(Set3)    
+#Clear will empty the set and del will delete the set completely
+Set3.clear()
+del Set3
+#Use unito to join 2 setsSet2.Union(Set3)
+
+#Dictionary: more advanced version of sets. Ordered
+ThisDict={"Brand":"Ford","Model":"Mustant","Year":"1992"}
+
+print(ThisDict)
+print(ThisDict["brand"])
+
+#No duplicateds in a dictionary
+#Contruct a dictionary
+Dict1=dict(name="John", age=31, country="Norway")
+print(Dict1)
+
+#Get keys, items from a dictionary and check
+#membership using if
+Dict1.items()
+Dict1.keys()
+Dict1.get('age') 
+if "age" in Dict1:
+    print("Yes, 'age' is in Dict1 ")
+
+#Change items in a dictionary and update dictionary items
+Dict1['age']=25
+print(Dict1)
+
+Dict1.update({"name":"Katie"})
+print(Dict1)
+
+#Add items and Remove items with Dictionary
+Dict1.update({'Height' : "5'6"})
+Dict1.pop("age")
+# There is also clear and del function too
+
+#Loop through a dictionary using keys, values and items
+for x in Dict1.keys():
+    print(x)
+for y in Dict1.values():
+    print(y)
+for (x,y) in Dict1.items():
+    print(x,y)
+    
+
+# Nested dictionaries and how to access item inside
+myFam={"child1":{"name":"Emily","Year":2002},"child2":{"name":"John","Year":2008}}
+myFam["child1"]["name"]
+
+# if condition ; elif =else if !!! Have to mention condition and it is if's sibling
+x=5
+y=5
+if x>y:
+    print("x is greater than y")
+elif x<y:
+    print("x is smaller than y")
+
+# else says the condition that is different than previously mentioned
+else: 
+    print("x is equal to y.")
+    
+    
+# Use pass under if statement to aovid getting an error
+xx=13
+yy=2
+if xx> yy:
+    pass
+
+# While loop can execute a series of statements 
+# as long as it is true
+
+i=1
+while i<10:
+    i+=2 
+    print (i)
+    
+# break it to break a loop even though the statement is true
+i=0
+while i<=20: 
+    print (i)
+    i+=2 
+    if i == 8:
+        break
+    
+#Use for to loop a list
+Gro_list=["apple","banana","cherry"]
+for x in Gro_list:
+
+    if x=="cherry":
+        break
+    print(x)
+  
+#The range() function returns a sequence of numbers, starting from 0 by default, and increments by 1 (by default), and ends at a specified number.
+for x in range(6):
+    print (x)
+
+for y in range(1,21,2):
+    print(y)
+ 
+# Apparently you can use else without if
+for x in range(9):
+    print(x)
+else: 
+    print("That is a weird way to use else")
+    
+    
+# Nested loop
+x_list=["apple","cherry","kiwi"]
+y_list=[1,2,3]
+for x in x_list:
+    for y in y_list:
+        print(x,y)
+# Define a function and call a function
+def resp_func(x):
+    print("Mr. " +x)
+resp_func("Li")
+
+
+# Lambda function: a lambda function is a small
+# anonymous function. It can take any number of 
+# argguments but can only have one expression
+#syntax: labmda arguments: expression
+
+#for example: multiply 10 to an argument a and return result
+x= lambda a: a*10
+print(x(5))
+    
+x=lambda a,b: a*b
+print(x(3,4))
+
+#Python arrays:Python does not have a built-in array suport
+#but one can use Python Lists. Or one can import a NumPy
+# library to use arrays
+
+cars=["Ford",'Honda',"Hyundai"]
+
+# Classes. Almost everything in Python is an object.
+# Classes are used to create objects
+
+class MyClass:
+    x=5
+p1 = MyClass()
+print(p1.x)    
+
+
+#Creat a class named Person and use _int_()
+#function to assign values
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
+
+p1 = Person("Lily", 36)
+
+print(p1.name)
+print(p1.age)
+
+
+#Inheritance allows us to define a class that inherits all the methods and properties from another class.
+#Parent class is the class being inherited from, also called base class.
+#Child class is the class that inherits from another class, also called derived class
+
+ 
+
+        
+    
+    
+
+
+
