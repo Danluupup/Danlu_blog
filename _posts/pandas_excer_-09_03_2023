@@ -1,0 +1,139 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Sep  2 17:59:31 2023
+
+@author: danlu
+"""
+
+#Pandas library exercise
+#Pandas is a Python library. Pandas is used to analyze data.
+
+#Pandas library is used for working with data sets.
+#It has functions for analyzing, cleaning, exploring and manipulating data
+#Pandas has a reference to both "Panel Data" and "Python Data Analysis"
+#Pandas can be used to clean messy data sets and make them readable and relevent
+
+#create a data frame
+import pandas as pd
+mydataset={"cars":["BMW","FORD","LEXUS","HONDA"],"colors":["blue","red","blue","black"]
+           }
+myvar =pd.DataFrame(mydataset)
+print(myvar)
+
+# output
+#    cars colors
+0    BMW   blue
+1   FORD    red
+2  LEXUS   blue
+3  HONDA  black
+
+#pandas series is a 1D array holding any data type
+import pandas as pd
+a =[1,3,5]
+myvar=pd.Series(a)
+print(myvar)
+
+#one can name series/the column of a dataframe mentioned above
+myvar=pd.Series(a,index=["x","y","z"])
+print(myvar)
+print(myvar["y"])
+
+#Use keys for index
+import pandas as pd
+calories={"day 1": "1000","day 2": "990", "day 3" : "995"}
+myvar = pd.Series(calories, index =["day 1", "day 2"])
+print(myvar)
+
+# a Pandas DateFrame is a 2D data structure, like a 2D array with rows and columns
+import pandas as pd
+data= {"calories":[330,430,150],"duration":[4,5,5]}
+df = pd.DataFrame(data)
+print(df)
+print(df.loc[[0,1]])
+df2= pd.DataFrame(data,index=["day 1", "day 2", "day 3"])
+print(df2)
+print(df2.loc["day 2"])
+
+
+#Import a CSV file into a DataFrame
+
+import pandas as pd
+df = pd.read_csv("data.csv")
+print(df)
+
+# Read JSON. Big data sets are often stored and extracted as JSON (plain text)
+import pandas as pd
+df = pd.read_json("data.json")
+print(df.to_string())
+
+
+# Data cleaning using pandas. Bad data includes empty cells, data in wrong formate, wrong data, duplicates
+import pandas as pd
+df = pd.read_csv("Dirty data for Pandas_09022023.csv")
+print(df)
+# First, clean the empty ceslls
+new_df = df.dropna()
+print(new_df.to_string)
+# if one wants to change the original dataset, inplace = True can be used
+# fill na with other values
+df.fillna(250,inplace= True)
+print(df)
+
+#A common way to replace empty cells, is to calculate the mean, median or mode value of the column.
+
+mean = df["Calories"].mean()
+df.fillna(mean,inplace = True)
+print(df)
+
+
+#Fix a wrong datetime using convert method
+
+df['date'] = pd.to_datetime(df['date'])
+
+#  for small data sets you might be able #fto replace the wrong data one by one, but not for big data sets.
+
+#  To replace wrong data for larger data sets you can create some rules, e.g. set some boundaries for legal values, and replace any values that are outside of the boundaries.
+# df.loc[] --to find 5th row and a certain column data and replace
+df.loc[5.'date'] = '2020-05-03'
+
+# for large dataset wrong data cleaning
+for x in df.index:
+    if df.loc[x,'Calories'] >220:
+        df.drop(x,inplace =True)
+print(df)
+
+# Find and remove duplicates
+
+print(df.duplicated()) # output is boolean
+print(df.drop_duplicates(inplace = True))
+
+# Correlation of data in pandas : one can use corr() function
+df.corr()
+
+#Use pandas and matplotlib.pyplot to plot data
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv('Dirty data for Pandas_09022023.csv')
+df.fillna(df['Calories'].mean(), inplace = True)
+df.plot(kind = 'scatter', x = 'Calories', y ='Calories')
+plt.show()
+
+#Return to the top few rows and return the bottom few of rows
+df.head(3)
+df.tail(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
