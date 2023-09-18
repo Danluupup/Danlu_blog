@@ -1,0 +1,77 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Sep 17 20:21:39 2023
+
+@author: danlu
+"""
+
+# data : https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ST0151EN-SkillsNetwork/labs/teachingratings.csv 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data = 'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-ST0151EN-SkillsNetwork/labs/teachingratings.csv'
+df = pd.read_csv(data)
+
+# Find the age mean and median by taking away duplicates
+df.describe()
+#find all the unique or non duplicated data by using prof label
+df_2 =df.prof.unique()
+
+# mean and standard deviation including all observations
+mean_1 = df['age'].mean()
+std_1 = df['age'].std()
+
+# mean and standard deviation after getting rid of duplicates
+# number of unique observations
+n_unique = df.prof.nunique()
+no_duplicates_df = df.drop_duplicates(subset = "prof")
+mean_2 = no_duplicates_df.mean()
+std_2 = no_duplicates_df.std()
+
+# Find the average teaching evaluation in both groups
+division_eval = df.groupby('division')['eval'].mean().reset_index()
+# Use a barchart to demenstrate if instructors for upper level classes have higher scores
+sns.set(style="whitegrid")
+ax = sns.barplot(x="division", y="eval", data=division_eval)
+
+# Plot the relationship between age and evaluation
+ax = sns.scatterplot(x = 'age', y ='eval', data = df)
+# Using gender-differentiated scatter plots
+ax = sns.scatterplot(x ='age', y = 'eval', hue="gender", data = df)
+# Use a box plot for beauty scores differentiated by course credits
+ax = sns.boxenplot(x ='credits', y ='beauty', data =df)
+# what is the number of courses taught by genders
+sns.catplot(x ='gender', kind = 'count', data =df)
+# add tenure to the previous plot
+sns.catplot(x= 'gender', kind ='count', hue= 'tenure',data = df)
+
+# add division as another factor to the previous histogram
+sns. catplot(x ='gender', kind ='count', row ='division', hue='tenure', data =df)
+
+# Create a scatterplot of age and evaluation scores, differentiated by age and gender
+sns.relplot(x ='age', y ='eval', hue ='gender', row ='division', data= df, height = 3, aspect =1.5)
+
+# create a box plot - age and insturction
+sns.boxplot(x = 'age', y='eval', data =df)
+# create age along with tenure and gender
+ax = sns.boxplot(x ='tenure', y = 'age', hue ='gender', data = df)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
