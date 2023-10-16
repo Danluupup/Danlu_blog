@@ -1,0 +1,161 @@
+CREATE TABLE Orders
+(
+OrderID int,
+CustomerID varchar(25),
+Price int
+)
+
+INSERT INTO Orders Values
+(1001, 'a001', 30000),
+(1002,'a002',400000),
+(1003,'a003',38020),
+(1004,'a004',45211)
+
+CREATE TABLE Customers
+(
+CustomerID varchar(25),
+Country varchar(25),
+OrderQuan int,
+ShipStatus varchar(25)
+)
+
+INSERT INTO Customers Values
+('a001', 'USA',200,'yes'),
+('a002','USA',290, 'no'),
+('a003','Germany',400,'yes'),
+('a004','Costa Rica',346,'no')
+
+SELECT TOP 4* FROM Customers
+SELECT TOP 4* FROM Orders
+
+SELECT Orders.CustomerID,Orders.OrderID, Customers.CustomerID, Customers.ShipStatus
+FROM Orders
+INNER JOIN Customers on Orders.CustomerID = Customers.CustomerID
+
+SELECT * 
+FROM Orders
+LEFT JOIN Customers on Customers.CustomerID = Orders.CustomerID
+
+SELECT * 
+FROM Orders
+FULL OUTER JOIN Customers on Customers.CustomerID = Orders.CustomerID
+
+SELECT Country
+FROM Orders
+FULL OUTER JOIN Customers on Customers.CustomerID = Orders.CustomerID
+
+SELECT CustomerID
+FROM Orders
+UNION ALL
+SELECT CustomerID
+FROM Customers
+
+SELECT (COUNT(Country)) AS 'Total number', Country
+FROM Customers
+GROUP BY Country
+ORDER BY (SELECT (COUNT(Country)) FROM Customers) ASC
+
+SELECT * FROM Customers
+ORDER BY
+(CASE
+WHEN Country is NULL THEN CustomerID
+ELSE Country
+END)
+
+-- How to make procedure 
+CREATE PROCEDURE SelectTop5 AS
+SELECT TOP 5* FROM Customers
+GO;
+-- execuate the procedure
+EXEC SelectTop5
+
+-- create database
+CREATE DATABASE newdata
+
+BACKUP DATABASE sqlLearning
+TO DISK ='C:\Users\danlu\OneDrive'
+
+--Truncate table : to delete the content inside a table but not drop
+TRUNCATE TABLE Customers
+
+/* ALTER TABLE can be used to add/drop a column or renmae a column*/
+ALTER TABLE Customers 
+ADD CustomersID varchar (25)
+DROP COLUMN CustomersID
+
+/* NOT NULL is used to ensure the columns will not accept null values*/
+CREATE TABLE Persons(
+  ID int NOT NULL,
+  LastName varchar(255) NOT NULL,
+  FirstName varchar (255) NOT NULL,
+  Age int
+)
+
+INSERT INTO Persons VALUES
+( 888, 'Deion','Lavender',22),
+(889,'Li','Sarah',25),
+(890,'Shumer','Jason',44)
+
+/* Primary key should have unique values and does not have NULL values
+A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).*/
+CREATE TABLE Persons2(
+ID int NOT NULL PRIMARY KEY,
+Lastnmae varchar(255) NOT NULL,
+Firstname varchar(255),
+Age int
+);
+
+ALTER TABLE Persons
+ADD CONSTRAINT PK_Persons PRIMARY KEY(ID,Lastname)
+
+--Primary key vs foreign key
+CREATE TABLE Orders(
+OrderID int NOT NULL,
+OrderNumer int NOT NULL,
+PersonID int,
+PRIMARY KEY (OrderID),
+CONSTRAINT FK_PersonOrder FOREIGN KEY(PersonID)
+REFERENCES Persons(PersonID)
+)
+
+--constraint  using check
+CREATE TABLE Persons3(
+ID int NOT NULL,
+LastName varchar(25),
+FirstName varchar(25),
+Age int CHECK(Age>=18)
+)
+
+CREATE INDEX INDEX_P
+ON Persons(LastName)
+
+DROP INDEX INDEX_P ON Persons
+
+
+--SQL views
+CREATE VIEW [Persons_name] AS
+SELECT FirstName, LastName FROM Persons
+
+--Query the view
+SELECT * FROM [Persons_name]
+
+SELECT * FROM Orders
+WHERE '1001' in (OrderID,Price) 
+
+
+SELECT * FROM EMPLOYEEDEMO
+LIMIT 3
+
+SELECT OrderID, Price from Orders
+WHERE OrderID IS NOT NULL
+
+--The UPDATE command is used to update existing rows in a table.
+SELECT * FROM EMPLOYEEDEMO
+UPDATE EMPLOYEEDEMO
+SET Firstname= 'JIM', Lastname='Reynolds', Age=42
+WHERE EmployeeID =1
+
+
+
+
+
